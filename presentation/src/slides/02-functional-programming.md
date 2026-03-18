@@ -1,13 +1,12 @@
-<!-- .slide: class="r-vstack justify-center section-slide" -->
+<!-- .slide: class="section-slide" -->
 
-## Lean starts from familiar ground
-<!-- .element: class="r-fit-text" -->
+## Functional core
 
-Before dependent types and proofs, Lean already looks like a typed functional language.
+Typed definitions, inductive data, structural recursion.
 
 --
 
-## First contact with Lean
+## Basic commands
 
 ### `#check`
 
@@ -22,47 +21,47 @@ Before dependent types and proofs, Lean already looks like a typed functional la
 #eval 1 + 2
 ```
 
-- `#check` asks for the type of an expression.
-- `#eval` asks Lean to compute the expression.
-- `(1 + 2 : Nat)` makes the intended type explicit.
+- `#check` infers a type.
+- `#eval` reduces an expression.
+- `(1 + 2 : Nat)` adds a type annotation.
 
 --
 
-## Start with a named value
+## A constant
 
 ```language-lean
 def hello : String := "Hello"
 ```
 
-- `def` introduces a name.
-- `:=` defines it by the expression on the right.
-- Lean records the result type in the environment.
+- `def` binds a name.
+- `:=` gives its value.
+- The type annotation is explicit.
 
 --
 
-## Turn the definition into a function
+## A unary function
 
 ```language-lean
 def add1 (n : Nat) : Nat := n + 1
 ```
 
-- `(n : Nat)` introduces an argument.
-- The return type is part of the contract.
+- `(n : Nat)` declares the parameter type.
+- `: Nat` declares the return type.
 
 --
 
-## Multiple parameters are still ordinary typed programming
+## Multiple parameters
 
 ```language-lean
 def addTwo (n : Nat) (k : Nat) : Nat := n + k
 ```
 
-- Functions can take several typed inputs.
-- Types already describe useful input and output structure.
+- Each parameter has a type.
+- The return type stays explicit.
 
 --
 
-## Data is defined by its constructors
+## Inductive data
 
 ```language-lean []
 inductive Bool where
@@ -70,12 +69,12 @@ inductive Bool where
   | true : Bool
 ```
 
-- Constructors describe the legal shapes of values.
-- `Bool` has exactly two constructors.
+- Constructors define valid values.
+- `Bool` has two cases.
 
 --
 
-## Constructors build data; `match` consumes it
+## Pattern matching
 
 ```language-lean []
 def notBool (b : Bool) : Bool :=
@@ -84,12 +83,12 @@ def notBool (b : Bool) : Bool :=
   | Bool.true => Bool.false
 ```
 
-- Pattern matching branches on the constructor that built the value.
-- The structure of the program follows the structure of the data.
+- Match on constructors.
+- Program shape follows data shape.
 
 --
 
-## Natural numbers are inductive too
+## Inductive naturals
 
 ```language-lean []
 inductive Nat where
@@ -97,12 +96,12 @@ inductive Nat where
   | succ (n : Nat) : Nat
 ```
 
-- `Nat` is built from `zero` and repeated `succ`.
-- Recursive data leads naturally to recursive programs.
+- `Nat` is built from `zero` and `succ`.
+- Programs over `Nat` follow those constructors.
 
 --
 
-## Recursive programs follow the same shape
+## Structural recursion
 
 ```language-lean []
 def double (n : Nat) : Nat :=
@@ -111,18 +110,18 @@ def double (n : Nat) : Nat :=
   | Nat.succ k => Nat.succ (Nat.succ (double k))
 ```
 
-- Handle the base case `Nat.zero`.
-- Recur on the smaller value `k`.
+- Base case: `Nat.zero`.
+- Recursive case: smaller `k`.
 
 --
 
-## What ordinary types already give us
+## Functional core summary
 
-- Typed expressions with static and dynamic views
-- Definitions and function signatures
-- Inductive data, pattern matching, and structural recursion
+- Typed expressions
+- Definitions and functions
+- Inductive data and recursion
 
-### Type constructors already vary with types
+### Type constructors
 
 ```language-lean
 List : Type → Type
@@ -130,5 +129,5 @@ List Nat
 List String
 ```
 
-Next step: can types vary with values too?
+Next: types indexed by values.
 <!-- .element: class="subtitle" -->

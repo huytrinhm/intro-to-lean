@@ -1,9 +1,9 @@
-<!-- .slide: class="r-vstack justify-center section-slide" -->
+<!-- .slide: class="section-slide" -->
 
-## The core idea of Lean
+## Lean in one line
 
-1. Start with ordinary typed programming.
-2. Let types track more meaning.
-3. Read proofs as programs.
+1. Write typed programs.
+2. Let types encode invariants.
+3. Treat proofs as terms.
 
-Lean unifies programming, typing, and proving in one language. <!-- .element: class="lead" -->
+One language for programs, types, and proofs. <!-- .element: class="lead" -->

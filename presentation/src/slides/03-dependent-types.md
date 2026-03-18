@@ -1,40 +1,39 @@
-<!-- .slide: class="r-vstack justify-center section-slide" -->
+<!-- .slide: class="section-slide" -->
 
-## This is where Lean stops feeling ordinary
-<!-- .element: class="r-fit-text" -->
+## Dependent types
 
-Dependent types preserve relationships that ordinary types forget.
+Types can mention values.
 
 --
 
-## Ordinary types are sometimes too weak
+## Ordinary types lose information
 
 ```language-lean
 List α → List β → List (α × β)
 ```
 
-Element types are remembered. Equal length is not.
+Element types are preserved. Length is not.
 <!-- .element: class="subtitle" -->
 
 - Ignore extra data?
 - Raise an error?
-- Return an option?
+- Return an `Option`?
 - Or make mismatched inputs unrepresentable?
 
 --
 
-## A return type can depend on the input value
+## Value-dependent return types
 
 ```language-lean
 (b : Bool) → if b then Nat else String
 ```
 
-- The result type itself changes with the input value.
-- The familiar `if ... then ... else ...` appears inside the type.
+- Return type depends on `b`.
+- The conditional appears in the type.
 
 --
 
-## Pattern matching refines the type too
+## Pattern matching refines types
 
 ```language-lean []
 def natOrStringThree (b : Bool) : if b then Nat else String :=
@@ -43,36 +42,34 @@ def natOrStringThree (b : Bool) : if b then Nat else String :=
   | false => "three"
 ```
 
-- Pattern matching chooses a branch at runtime.
-- It also sharpens the static type in each branch.
+- Each branch gets a more specific type.
 - Values can refine types.
 
 --
 
-## What if a collection remembered its length?
+## Length-indexed vectors
 
 ```language-lean
 inductive Vect (α : Type) : Nat → Type where
 ```
 
-- `Vect α n` is a family of types indexed by a natural number.
-- Read it as vectors of `α` with length `n`.
+- `Vect α n` is indexed by length `n`.
 
 --
 
-## The constructors carry the length story
+## Base constructor
 
 ```language-lean
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
 ```
 
-- `nil` can only build a vector of length `0`.
-- The invariant is already visible in the constructor.
+- `nil : Vect α 0`
+- Empty vector has length `0`.
 
 --
 
-## Adding one element changes the index too
+## Cons updates the index
 
 ```language-lean []
 inductive Vect (α : Type) : Nat → Type where
@@ -80,12 +77,12 @@ inductive Vect (α : Type) : Nat → Type where
   | cons : α → {n : Nat} → Vect α n → Vect α (n + 1)
 ```
 
-- Adding an element changes the type from length `n` to `n + 1`.
-- The constructor enforces that change statically.
+- `cons` maps length `n` to `n + 1`.
+- The constructor enforces that change.
 
 --
 
-## `Vect.zip` has no mismatched-length cases
+## `Vect.zip` rules out mismatch
 
 ```language-lean []
 def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
@@ -94,18 +91,17 @@ def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
       Vect.cons (x, y) (Vect.zip xs ys)
 ```
 
-- Both inputs share the same length index `n`.
-- Unequal-length branches are not missing by accident.
-- A runtime check becomes a compile-time guarantee.
+- Both inputs share index `n`.
+- No unequal-length branch is needed.
 
 --
 
-## The type checker knows more
+## Dependent types summary
 
 - **Ordinary function type**: `Nat → Nat`
 - **Type constructor**: `List : Type → Type`
 - **Indexed family**: `Vect : Type → Nat → Type`
 - **Dependent function**: `(b : Bool) → if b then Nat else String`
 
-Once types express richer invariants, theorem proving stops feeling like an unrelated extra.
+Types can track values and invariants.
 <!-- .element: class="subtitle" -->

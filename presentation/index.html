@@ -19,41 +19,41 @@
           data-separator-vertical="^\r?\n--\r?\n$"
         >
           <script type="text/template">
-<!-- .slide: class="r-vstack items-start justify-center opening-slide" -->
+<!-- .slide: class="opening-slide" -->
 
 <img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
 
 # Lean: From Functional Programming to Theorem Proving
 
-One typed core language for programs, types, and proofs.
+Programs, value-indexed types, and proofs in one typed language.
 <!-- .element: class="lead" -->
 
-1. Reject the wrong kind of thing. <!-- .element: class="fragment fade-up" -->
-2. Track the right shape, not only the right type. <!-- .element: class="fragment fade-up" -->
-3. Check evidence for precise claims. <!-- .element: class="fragment fade-up" -->
+1. Functional core. <!-- .element: class="fragment fade-up" -->
+2. Dependent types. <!-- .element: class="fragment fade-up" -->
+3. Proof terms. <!-- .element: class="fragment fade-up" -->
 
 ---
 
-## One Talk, Three Stages
+## Plan
 
-1. **Functional programming**: expressions, definitions, inductive data, recursion.
-2. **Dependent types**: types can remember relationships ordinary types forget.
-3. **Proofs as programs**: a theorem is a type, and a proof is evidence for it.
+1. **Functional core**: definitions, inductive data, structural recursion.
+2. **Dependent types**: types indexed by values.
+3. **Proof terms**: propositions, evidence, tactics.
 
-These are three stages of one idea, not three separate topics.
+One language throughout.
 <!-- .element: class="subtitle" -->
 
 ---
 
-## What Is Lean?
+## Lean
 
-Lean is a typed core language where programs, types, and proofs all live in the same system.
+Lean is a typed language for programming and proving.
 <!-- .element: class="lead" -->
 
-- Functional programming language
-- Interactive theorem prover
-- Used for mathematics, software verification, and teaching
-- Best understood as a PL story rather than a product tour
+- Functional programming
+- Dependent types
+- Interactive theorem proving
+- Used in mathematics and software verification
           </script>
         </section>
 
@@ -63,16 +63,15 @@ Lean is a typed core language where programs, types, and proofs all live in the 
           data-separator-vertical="^\r?\n--\r?\n$"
         >
           <script type="text/template">
-<!-- .slide: class="r-vstack justify-center section-slide" -->
+<!-- .slide: class="section-slide" -->
 
-## Lean starts from familiar ground
-<!-- .element: class="r-fit-text" -->
+## Functional core
 
-Before dependent types and proofs, Lean already looks like a typed functional language.
+Typed definitions, inductive data, structural recursion.
 
 --
 
-## First contact with Lean
+## Basic commands
 
 ### `#check`
 
@@ -87,47 +86,47 @@ Before dependent types and proofs, Lean already looks like a typed functional la
 #eval 1 + 2
 ```
 
-- `#check` asks for the type of an expression.
-- `#eval` asks Lean to compute the expression.
-- `(1 + 2 : Nat)` makes the intended type explicit.
+- `#check` infers a type.
+- `#eval` reduces an expression.
+- `(1 + 2 : Nat)` adds a type annotation.
 
 --
 
-## Start with a named value
+## A constant
 
 ```language-lean
 def hello : String := "Hello"
 ```
 
-- `def` introduces a name.
-- `:=` defines it by the expression on the right.
-- Lean records the result type in the environment.
+- `def` binds a name.
+- `:=` gives its value.
+- The type annotation is explicit.
 
 --
 
-## Turn the definition into a function
+## A unary function
 
 ```language-lean
 def add1 (n : Nat) : Nat := n + 1
 ```
 
-- `(n : Nat)` introduces an argument.
-- The return type is part of the contract.
+- `(n : Nat)` declares the parameter type.
+- `: Nat` declares the return type.
 
 --
 
-## Multiple parameters are still ordinary typed programming
+## Multiple parameters
 
 ```language-lean
 def addTwo (n : Nat) (k : Nat) : Nat := n + k
 ```
 
-- Functions can take several typed inputs.
-- Types already describe useful input and output structure.
+- Each parameter has a type.
+- The return type stays explicit.
 
 --
 
-## Data is defined by its constructors
+## Inductive data
 
 ```language-lean []
 inductive Bool where
@@ -135,12 +134,12 @@ inductive Bool where
   | true : Bool
 ```
 
-- Constructors describe the legal shapes of values.
-- `Bool` has exactly two constructors.
+- Constructors define valid values.
+- `Bool` has two cases.
 
 --
 
-## Constructors build data; `match` consumes it
+## Pattern matching
 
 ```language-lean []
 def notBool (b : Bool) : Bool :=
@@ -149,12 +148,12 @@ def notBool (b : Bool) : Bool :=
   | Bool.true => Bool.false
 ```
 
-- Pattern matching branches on the constructor that built the value.
-- The structure of the program follows the structure of the data.
+- Match on constructors.
+- Program shape follows data shape.
 
 --
 
-## Natural numbers are inductive too
+## Inductive naturals
 
 ```language-lean []
 inductive Nat where
@@ -162,12 +161,12 @@ inductive Nat where
   | succ (n : Nat) : Nat
 ```
 
-- `Nat` is built from `zero` and repeated `succ`.
-- Recursive data leads naturally to recursive programs.
+- `Nat` is built from `zero` and `succ`.
+- Programs over `Nat` follow those constructors.
 
 --
 
-## Recursive programs follow the same shape
+## Structural recursion
 
 ```language-lean []
 def double (n : Nat) : Nat :=
@@ -176,18 +175,18 @@ def double (n : Nat) : Nat :=
   | Nat.succ k => Nat.succ (Nat.succ (double k))
 ```
 
-- Handle the base case `Nat.zero`.
-- Recur on the smaller value `k`.
+- Base case: `Nat.zero`.
+- Recursive case: smaller `k`.
 
 --
 
-## What ordinary types already give us
+## Functional core summary
 
-- Typed expressions with static and dynamic views
-- Definitions and function signatures
-- Inductive data, pattern matching, and structural recursion
+- Typed expressions
+- Definitions and functions
+- Inductive data and recursion
 
-### Type constructors already vary with types
+### Type constructors
 
 ```language-lean
 List : Type → Type
@@ -195,7 +194,7 @@ List Nat
 List String
 ```
 
-Next step: can types vary with values too?
+Next: types indexed by values.
 <!-- .element: class="subtitle" -->
           </script>
         </section>
@@ -206,43 +205,42 @@ Next step: can types vary with values too?
           data-separator-vertical="^\r?\n--\r?\n$"
         >
           <script type="text/template">
-<!-- .slide: class="r-vstack justify-center section-slide" -->
+<!-- .slide: class="section-slide" -->
 
-## This is where Lean stops feeling ordinary
-<!-- .element: class="r-fit-text" -->
+## Dependent types
 
-Dependent types preserve relationships that ordinary types forget.
+Types can mention values.
 
 --
 
-## Ordinary types are sometimes too weak
+## Ordinary types lose information
 
 ```language-lean
 List α → List β → List (α × β)
 ```
 
-Element types are remembered. Equal length is not.
+Element types are preserved. Length is not.
 <!-- .element: class="subtitle" -->
 
 - Ignore extra data?
 - Raise an error?
-- Return an option?
+- Return an `Option`?
 - Or make mismatched inputs unrepresentable?
 
 --
 
-## A return type can depend on the input value
+## Value-dependent return types
 
 ```language-lean
 (b : Bool) → if b then Nat else String
 ```
 
-- The result type itself changes with the input value.
-- The familiar `if ... then ... else ...` appears inside the type.
+- Return type depends on `b`.
+- The conditional appears in the type.
 
 --
 
-## Pattern matching refines the type too
+## Pattern matching refines types
 
 ```language-lean []
 def natOrStringThree (b : Bool) : if b then Nat else String :=
@@ -251,36 +249,34 @@ def natOrStringThree (b : Bool) : if b then Nat else String :=
   | false => "three"
 ```
 
-- Pattern matching chooses a branch at runtime.
-- It also sharpens the static type in each branch.
+- Each branch gets a more specific type.
 - Values can refine types.
 
 --
 
-## What if a collection remembered its length?
+## Length-indexed vectors
 
 ```language-lean
 inductive Vect (α : Type) : Nat → Type where
 ```
 
-- `Vect α n` is a family of types indexed by a natural number.
-- Read it as vectors of `α` with length `n`.
+- `Vect α n` is indexed by length `n`.
 
 --
 
-## The constructors carry the length story
+## Base constructor
 
 ```language-lean
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
 ```
 
-- `nil` can only build a vector of length `0`.
-- The invariant is already visible in the constructor.
+- `nil : Vect α 0`
+- Empty vector has length `0`.
 
 --
 
-## Adding one element changes the index too
+## Cons updates the index
 
 ```language-lean []
 inductive Vect (α : Type) : Nat → Type where
@@ -288,12 +284,12 @@ inductive Vect (α : Type) : Nat → Type where
   | cons : α → {n : Nat} → Vect α n → Vect α (n + 1)
 ```
 
-- Adding an element changes the type from length `n` to `n + 1`.
-- The constructor enforces that change statically.
+- `cons` maps length `n` to `n + 1`.
+- The constructor enforces that change.
 
 --
 
-## `Vect.zip` has no mismatched-length cases
+## `Vect.zip` rules out mismatch
 
 ```language-lean []
 def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
@@ -302,20 +298,19 @@ def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
       Vect.cons (x, y) (Vect.zip xs ys)
 ```
 
-- Both inputs share the same length index `n`.
-- Unequal-length branches are not missing by accident.
-- A runtime check becomes a compile-time guarantee.
+- Both inputs share index `n`.
+- No unequal-length branch is needed.
 
 --
 
-## The type checker knows more
+## Dependent types summary
 
 - **Ordinary function type**: `Nat → Nat`
 - **Type constructor**: `List : Type → Type`
 - **Indexed family**: `Vect : Type → Nat → Type`
 - **Dependent function**: `(b : Bool) → if b then Nat else String`
 
-Once types express richer invariants, theorem proving stops feeling like an unrelated extra.
+Types can track values and invariants.
 <!-- .element: class="subtitle" -->
           </script>
         </section>
@@ -326,66 +321,64 @@ Once types express richer invariants, theorem proving stops feeling like an unre
           data-separator-vertical="^\r?\n--\r?\n$"
         >
           <script type="text/template">
-<!-- .slide: class="r-vstack justify-center section-slide" -->
+<!-- .slide: class="section-slide" -->
 
-## Theorem proving is the same story pushed further
-<!-- .element: class="r-fit-text" -->
+## Proof terms
 
-A theorem statement is another typed object inside the same language. A proof is evidence for it.
+Propositions in `Prop`, proofs as terms.
 
 --
 
-## `Bool` and `Prop` are different
+## `Bool` vs `Prop`
 
-### Boolean values
+### `Bool`
 
 ```language-lean
 #check true
 #check false
 ```
 
-These are values of type `Bool`.
+Computable truth values.
 <!-- .element: class="subtitle" -->
 
-### Propositions
+### `Prop`
 
 ```language-lean
 #check True
 #check False
 ```
 
-These live in `Prop`, where theorem statements are expressed.
+Theorem statements.
 <!-- .element: class="subtitle" -->
 
-Logic is represented inside the same type-theoretic language.
+`Bool` computes; `Prop` states claims.
 <!-- .element: class="subtitle" -->
 
 --
 
-## Lean asks for evidence, not persuasion
+## A theorem is a type
 
 ```language-lean
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := ?
 ```
 
-- Assume `p`, `q`, `hp : p`, and `hq : q`.
-- The goal is to produce a term of type `p`.
+- Assumptions become inputs.
+- Goal: produce a term of type `p`.
 
 --
 
-## The smallest proof looks like returning a value
+## A proof term
 
 ```language-lean
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 ```
 
-- The goal asks for evidence of type `p`.
-- `hp` already has that type.
-- A proof can be as small as returning the needed value.
+- `hp` already has type `p`.
+- The proof is the term `hp`.
 
 --
 
-## Conjunction behaves like structured data
+## Conjunction as data
 
 ```language-lean
 #check And.intro
@@ -393,26 +386,25 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 #check And.right
 ```
 
-- `And.intro` builds evidence for `p ∧ q`.
-- `And.left` and `And.right` project the two parts back out.
-- Proof structure mirrors typed programming structure.
+- `And.intro` builds `p ∧ q`.
+- `And.left` and `And.right` project its components.
 
 --
 
-## A larger proof is still just composition
+## Composed proof term
 
 ```language-lean
 theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
   And.intro (And.right hpq) (And.left hpq)
 ```
 
-- `And.right hpq` extracts the proof of `q`.
-- `And.left hpq` extracts the proof of `p`.
-- `And.intro` rebuilds them as `q ∧ p`.
+- Extract `q`.
+- Extract `p`.
+- Build `q ∧ p`.
 
 --
 
-## The same proof can be built interactively
+## Tactic script
 
 ```language-lean []
 theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
@@ -421,13 +413,12 @@ theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
   exact And.left hpq
 ```
 
-- `by` opens tactic mode.
-- Lean can guide proof construction step by step.
-- The theorem is the same; only the proof style changes.
+- `by` starts tactic mode.
+- Tactics build the same proof term step by step.
 
 --
 
-## Recursion and induction have the same shape
+## Recursion and induction
 
 ### Recursive program on `Nat`
 
@@ -445,7 +436,7 @@ theorem h : ∀ n : Nat, P n
   | Nat.succ k => ... h k ...
 ```
 
-The parallel comes from the same inductive structure introduced in the programming part of the talk.
+Same inductive structure, different goal.
 <!-- .element: class="subtitle" -->
           </script>
         </section>
@@ -456,15 +447,15 @@ The parallel comes from the same inductive structure introduced in the programmi
           data-separator-vertical="^\r?\n--\r?\n$"
         >
           <script type="text/template">
-<!-- .slide: class="r-vstack justify-center section-slide" -->
+<!-- .slide: class="section-slide" -->
 
-## The core idea of Lean
+## Lean in one line
 
-1. Start with ordinary typed programming.
-2. Let types track more meaning.
-3. Read proofs as programs.
+1. Write typed programs.
+2. Let types encode invariants.
+3. Treat proofs as terms.
 
-Lean unifies programming, typing, and proving in one language. <!-- .element: class="lead" -->
+One language for programs, types, and proofs. <!-- .element: class="lead" -->
           </script>
         </section>
       </div>

@@ -1,35 +1,35 @@
-<!-- .slide: class="r-vstack items-start justify-center opening-slide" -->
+<!-- .slide: class="opening-slide" -->
 
 <img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
 
 # Lean: From Functional Programming to Theorem Proving
 
-One typed core language for programs, types, and proofs.
+Programs, value-indexed types, and proofs in one typed language.
 <!-- .element: class="lead" -->
 
-1. Reject the wrong kind of thing. <!-- .element: class="fragment fade-up" -->
-2. Track the right shape, not only the right type. <!-- .element: class="fragment fade-up" -->
-3. Check evidence for precise claims. <!-- .element: class="fragment fade-up" -->
+1. Functional core. <!-- .element: class="fragment fade-up" -->
+2. Dependent types. <!-- .element: class="fragment fade-up" -->
+3. Proof terms. <!-- .element: class="fragment fade-up" -->
 
 ---
 
-## One Talk, Three Stages
+## Plan
 
-1. **Functional programming**: expressions, definitions, inductive data, recursion.
-2. **Dependent types**: types can remember relationships ordinary types forget.
-3. **Proofs as programs**: a theorem is a type, and a proof is evidence for it.
+1. **Functional core**: definitions, inductive data, structural recursion.
+2. **Dependent types**: types indexed by values.
+3. **Proof terms**: propositions, evidence, tactics.
 
-These are three stages of one idea, not three separate topics.
+One language throughout.
 <!-- .element: class="subtitle" -->
 
 ---
 
-## What Is Lean?
+## Lean
 
-Lean is a typed core language where programs, types, and proofs all live in the same system.
+Lean is a typed language for programming and proving.
 <!-- .element: class="lead" -->
 
-- Functional programming language
-- Interactive theorem prover
-- Used for mathematics, software verification, and teaching
-- Best understood as a PL story rather than a product tour
+- Functional programming
+- Dependent types
+- Interactive theorem proving
+- Used in mathematics and software verification
