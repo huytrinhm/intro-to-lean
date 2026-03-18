@@ -6,7 +6,6 @@
     <title>Lean Presentation</title>
     <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
     <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css">
-    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -22,17 +21,11 @@
     <script>
       const deck = new Reveal({
         hash: true,
-        controls: true,
-        progress: true,
-        slideNumber: "c/t",
         center: false,
         width: 1440,
         height: 810,
         margin: 0.06,
-        transition: "slide",
-        backgroundTransition: "fade",
-        autoAnimateDuration: 0.55,
-        autoAnimateEasing: "ease-out",
+        transition: "fade",
         pdfSeparateFragments: false,
         plugins: [RevealHighlight, RevealNotes]
       });
