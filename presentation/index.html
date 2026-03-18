@@ -12,756 +12,476 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="hero-slide">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <p class="eyebrow">PL Lecture / Intro to Lean</p>
-              <h1>Lean: From Functional Programming to Theorem Proving</h1>
-              <p class="lede">
-                One typed core language keeps more of a program's meaning visible at compile time.
-              </p>
-              <div class="problem-ladder">
-                <article class="ladder-step fragment fade-up">
-                  <span class="step-number">01</span>
-                  <h3>Wrong kind of thing</h3>
-                  <p>Reject nonsense before a program runs.</p>
-                </article>
-                <article class="ladder-step fragment fade-up">
-                  <span class="step-number">02</span>
-                  <h3>Right kind, wrong shape</h3>
-                  <p>Catch structural mistakes like mismatched lengths.</p>
-                </article>
-                <article class="ladder-step fragment fade-up">
-                  <span class="step-number">03</span>
-                  <h3>Precise claim</h3>
-                  <p>Check evidence for a theorem, not just a program shape.</p>
-                </article>
-              </div>
-            </div>
-            <div class="hero-panel">
-              <div class="logo-shell">
-                <img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
-              </div>
-              <p class="panel-label">Guiding question</p>
-              <h2>What more can Lean know statically about a program?</h2>
-              <p class="panel-note">
-                The whole deck follows that one question from ordinary types to dependent types to proofs.
-              </p>
-            </div>
-          </div>
+        <section
+          data-markdown
+          data-separator="^\r?\n---\r?\n$"
+          data-separator-vertical="^\r?\n--\r?\n$"
+        >
+          <script type="text/template">
+<!-- .slide: class="r-vstack items-start justify-center" -->
+
+<img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
+
+# Lean: From Functional Programming to Theorem Proving
+
+One typed core language for programs, types, and proofs.
+<!-- .element: class="lead" -->
+
+1. Reject the wrong kind of thing. <!-- .element: class="fragment fade-up" -->
+2. Track the right shape, not only the right type. <!-- .element: class="fragment fade-up" -->
+3. Check evidence for precise claims. <!-- .element: class="fragment fade-up" -->
+
+---
+
+## One Talk, Three Stages
+
+1. **Functional programming**: expressions, definitions, inductive data, recursion.
+2. **Dependent types**: types can remember relationships ordinary types forget.
+3. **Proofs as programs**: a theorem is a type, and a proof is evidence for it.
+
+These are three stages of one idea, not three separate topics.
+<!-- .element: class="subtitle" -->
+
+---
+
+## What Is Lean?
+
+Lean is a typed core language where programs, types, and proofs all live in the same system.
+<!-- .element: class="lead" -->
+
+- Functional programming language
+- Interactive theorem prover
+- Used for mathematics, software verification, and teaching
+- Best understood as a PL story rather than a product tour
+          </script>
         </section>
 
-        <section class="frame-slide">
-          <p class="eyebrow">Roadmap</p>
-          <h2>One talk, three stages</h2>
-          <div class="roadmap-grid">
-            <article class="roadmap-card fragment fade-up">
-              <span class="roadmap-index">01</span>
-              <h3>Functional programming</h3>
-              <p>Expressions, definitions, inductive data, recursion.</p>
-            </article>
-            <article class="roadmap-card fragment fade-up">
-              <span class="roadmap-index">02</span>
-              <h3>Dependent types</h3>
-              <p>Types can remember relationships that ordinary types forget.</p>
-            </article>
-            <article class="roadmap-card fragment fade-up">
-              <span class="roadmap-index">03</span>
-              <h3>Proofs as programs</h3>
-              <p>A theorem becomes a type, and a proof is evidence inhabiting it.</p>
-            </article>
-          </div>
-          <p class="closing-line">
-            Not three separate topics. One idea revealing itself in three stages.
-          </p>
-        </section>
+        <section
+          data-markdown
+          data-separator="^\r?\n---\r?\n$"
+          data-separator-vertical="^\r?\n--\r?\n$"
+        >
+          <script type="text/template">
+<!-- .slide: class="r-vstack justify-center section-slide" -->
 
-        <section class="frame-slide">
-          <p class="eyebrow">What Is Lean?</p>
-          <div class="two-column">
-            <div class="quote-card">
-              <p class="quote-mark">"</p>
-              <h2>One typed core language for programs, types, and proofs.</h2>
-              <p>
-                Lean is interesting because the second and third items are not bolted onto the first one.
-              </p>
-            </div>
-            <div class="list-card">
-              <h3>Lean in practice</h3>
-              <ul class="clean-list">
-                <li>Functional programming language</li>
-                <li>Interactive theorem prover</li>
-                <li>Used for mathematics, software verification, and teaching</li>
-                <li>Best understood as a PL story, not a product tour</li>
-              </ul>
-              <p class="muted-note">The key move is that the type system can carry much richer meaning.</p>
-            </div>
-          </div>
-        </section>
+## Lean starts from familiar ground
+<!-- .element: class="r-fit-text" -->
 
+Before dependent types and proofs, Lean already looks like a typed functional language.
 
-        <section>
-          <section class="section-divider">
-            <p class="eyebrow">Part II</p>
-            <h2>Lean starts from familiar ground</h2>
-            <p class="divider-text">
-              Before dependent types and proofs, Lean already looks like a typed functional language.
-            </p>
-            <div class="section-track">
-              <span class="track-active">Programs</span>
-              <span>Types</span>
-              <span>Proofs</span>
-            </div>
-          </section>
+--
 
-          <section class="frame-slide">
-            <p class="eyebrow">Static vs Dynamic</p>
-            <h2>First contact with Lean</h2>
-            <div class="code-grid two-up">
-              <article class="code-card fragment fade-up">
-                <h3>`#check`</h3>
-                <pre><code class="language-lean" data-trim>
+## First contact with Lean
+
+### `#check`
+
+```nohighlight
 #check 1
 #check true
-                </code></pre>
-                <p>Ask Lean for the type of an expression.</p>
-              </article>
-              <article class="code-card fragment fade-up">
-                <h3>`#eval`</h3>
-                <pre><code class="language-lean" data-trim>
+```
+
+### `#eval`
+
+```nohighlight
 #eval 1 + 2
-                </code></pre>
-                <p>Ask Lean to compute the expression.</p>
-              </article>
-            </div>
-            <div class="mini-grid">
-              <article class="mini-card">
-                <h3>Static view</h3>
-                <p>What kind of thing is this expression?</p>
-              </article>
-              <article class="mini-card">
-                <h3>Dynamic view</h3>
-                <p>What does this expression compute to?</p>
-              </article>
-              <article class="mini-card">
-                <h3>Explicit contract</h3>
-                <p><code>(1 + 2 : Nat)</code> and <code>(1 - 2 : Int)</code> make the intended type visible.</p>
-              </article>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Definitions</p>
-            <h2>Start with a named value</h2>
-            <div class="split-layout">
-              <pre data-id="definition-flow"><code class="language-lean" data-trim>
+- `#check` asks for the type of an expression.
+- `#eval` asks Lean to compute the expression.
+- `(1 + 2 : Nat)` makes the intended type explicit.
+
+--
+
+## Start with a named value
+
+```nohighlight
 def hello : String := "Hello"
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>`def` introduces a name</h3>
-                  <p>`:=` means the name is defined by the expression on the right.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>Why this matters</h3>
-                  <p>We are moving from raw expressions to a typed environment of named meanings.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Definitions</p>
-            <h2>Then turn the definition into a function</h2>
-            <div class="split-layout">
-              <pre data-id="definition-flow"><code class="language-lean" data-trim>
+- `def` introduces a name.
+- `:=` defines it by the expression on the right.
+- Lean records the result type in the environment.
+
+--
+
+## Turn the definition into a function
+
+```nohighlight
 def add1 (n : Nat) : Nat := n + 1
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Input</h3>
-                  <p><code>(n : Nat)</code> introduces an argument named <code>n</code> of type <code>Nat</code>.</p>
-                </article>
-                <article class="callout-card">
-                  <h3>Output</h3>
-                  <p>The return type is part of the function's contract, not decoration.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Definitions</p>
-            <h2>Ordinary typed programming still scales up</h2>
-            <div class="split-layout">
-              <pre data-id="definition-flow"><code class="language-lean" data-trim>
+- `(n : Nat)` introduces an argument.
+- The return type is part of the contract.
+
+--
+
+## Multiple parameters are still ordinary typed programming
+
+```nohighlight
 def addTwo (n : Nat) (k : Nat) : Nat := n + k
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Multiple parameters</h3>
-                  <p>Nothing mysterious yet. This is familiar typed functional programming.</p>
-                </article>
-                <article class="callout-card emphasis">
-                  <h3>Key baseline</h3>
-                  <p>Types already describe a useful input/output contract before we add richer invariants.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Inductive Data</p>
-            <h2>Data is defined by its constructors</h2>
-            <div class="split-layout">
-              <pre data-id="bool-flow"><code class="language-lean" data-trim>
+- Functions can take several typed inputs.
+- Types already describe useful input and output structure.
+
+--
+
+## Data is defined by its constructors
+
+```nohighlight
 inductive Bool where
   | false : Bool
   | true : Bool
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Formation rule</h3>
-                  <p>An inductive type tells us the legal shapes of its values.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>`Bool` is intentionally simple</h3>
-                  <p>Two constructors, no recursion, just enough structure to explain the idea cleanly.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Pattern Matching</p>
-            <h2>Constructors build data. `match` consumes it.</h2>
-            <div class="split-layout">
-              <pre data-id="bool-flow"><code class="language-lean" data-trim>
+- Constructors describe the legal shapes of values.
+- `Bool` has exactly two constructors.
+
+--
+
+## Constructors build data; `match` consumes it
+
+```nohighlight
 def notBool (b : Bool) : Bool :=
   match b with
   | Bool.false => Bool.true
   | Bool.true => Bool.false
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Elimination rule</h3>
-                  <p>Pattern matching chooses a result according to the constructor that built the value.</p>
-                </article>
-                <article class="callout-card">
-                  <h3>Programming pattern</h3>
-                  <p>The structure of the program mirrors the structure of the data.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Recursive Data</p>
-            <h2>Natural numbers are inductive too</h2>
-            <div class="split-layout">
-              <pre data-id="nat-flow"><code class="language-lean" data-trim>
+- Pattern matching branches on the constructor that built the value.
+- The structure of the program follows the structure of the data.
+
+--
+
+## Natural numbers are inductive too
+
+```nohighlight
 inductive Nat where
   | zero : Nat
   | succ (n : Nat) : Nat
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Self-similar structure</h3>
-                  <p><code>Nat</code> is built from <code>zero</code> and repeated applications of <code>succ</code>.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>Consequence</h3>
-                  <p>Recursive data leads naturally to recursive programs.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Structural Recursion</p>
-            <h2>Recursive programs follow the same shape</h2>
-            <div class="split-layout">
-              <pre data-id="nat-flow"><code class="language-lean" data-trim>
+- `Nat` is built from `zero` and repeated `succ`.
+- Recursive data leads naturally to recursive programs.
+
+--
+
+## Recursive programs follow the same shape
+
+```nohighlight
 def double (n : Nat) : Nat :=
   match n with
   | Nat.zero => Nat.zero
   | Nat.succ k => Nat.succ (Nat.succ (double k))
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Base case</h3>
-                  <p>Handle <code>Nat.zero</code>.</p>
-                </article>
-                <article class="callout-card">
-                  <h3>Step case</h3>
-                  <p>Recur on the structurally smaller value <code>k</code>.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section class="frame-slide">
-            <p class="eyebrow">Checkpoint</p>
-            <h2>What ordinary types already give us</h2>
-            <div class="mini-grid">
-              <article class="mini-card">
-                <h3>Expressions</h3>
-                <p><code>#check</code> and <code>#eval</code> separate static and dynamic views.</p>
-              </article>
-              <article class="mini-card">
-                <h3>Programs</h3>
-                <p><code>def</code>, function types, pattern matching, structural recursion.</p>
-              </article>
-              <article class="mini-card">
-                <h3>Data</h3>
-                <p>Inductive types define legal shapes, and programs consume those shapes.</p>
-              </article>
-            </div>
-            <div class="bridge-card">
-              <div>
-                <p class="bridge-label">Bridge to the next step</p>
-                <h3>`List` already varies with a type argument</h3>
-              </div>
-              <pre><code class="language-lean" data-trim>
+- Handle the base case `Nat.zero`.
+- Recur on the smaller value `k`.
+
+--
+
+## What ordinary types already give us
+
+- Typed expressions with static and dynamic views
+- Definitions and function signatures
+- Inductive data, pattern matching, and structural recursion
+
+### Type constructors already vary with types
+
+```nohighlight
 List : Type → Type
 List Nat
 List String
-              </code></pre>
-            </div>
-            <p class="closing-line">The next question is whether types can vary with values too.</p>
-          </section>
+```
+
+Next step: can types vary with values too?
+<!-- .element: class="subtitle" -->
+          </script>
         </section>
 
+        <section
+          data-markdown
+          data-separator="^\r?\n---\r?\n$"
+          data-separator-vertical="^\r?\n--\r?\n$"
+        >
+          <script type="text/template">
+<!-- .slide: class="r-vstack justify-center section-slide" -->
 
-        <section>
-          <section class="section-divider">
-            <p class="eyebrow">Part III</p>
-            <h2>This is where Lean stops feeling ordinary</h2>
-            <p class="divider-text">
-              Ordinary types classify values. Dependent types can preserve relationships between them.
-            </p>
-            <div class="section-track">
-              <span>Programs</span>
-              <span class="track-active">Types</span>
-              <span>Proofs</span>
-            </div>
-          </section>
+## This is where Lean stops feeling ordinary
+<!-- .element: class="r-fit-text" -->
 
-          <section class="frame-slide">
-            <p class="eyebrow">Motivation</p>
-            <h2>Ordinary types are sometimes too weak</h2>
-            <div class="two-column">
-              <div class="quote-card">
-                <h3>`zip` with ordinary lists</h3>
-                <pre><code class="language-lean" data-trim>
+Dependent types preserve relationships that ordinary types forget.
+
+--
+
+## Ordinary types are sometimes too weak
+
+```nohighlight
 List α → List β → List (α × β)
-                </code></pre>
-                <p>The element types are remembered. The relationship between the two lengths is not.</p>
-              </div>
-              <div class="list-card">
-                <h3>If the lengths differ, what should happen?</h3>
-                <ul class="clean-list">
-                  <li>Ignore extra data?</li>
-                  <li>Raise an error?</li>
-                  <li>Return an option?</li>
-                  <li>Or make mismatched inputs unrepresentable?</li>
-                </ul>
-              </div>
-            </div>
-            <p class="closing-line">Dependent types are about keeping more of that relation visible to the type checker.</p>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Dependent Function</p>
-            <h2>A return type can depend on the input value</h2>
-            <div class="split-layout">
-              <pre data-id="dependent-flow"><code class="language-lean" data-trim>
+Element types are remembered. Equal length is not.
+<!-- .element: class="subtitle" -->
+
+- Ignore extra data?
+- Raise an error?
+- Return an option?
+- Or make mismatched inputs unrepresentable?
+
+--
+
+## A return type can depend on the input value
+
+```nohighlight
 (b : Bool) → if b then Nat else String
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>The shock point</h3>
-                  <p>The familiar <code>if ... then ... else ...</code> has moved inside the type.</p>
-                </article>
-                <article class="callout-card emphasis">
-                  <h3>Meaning</h3>
-                  <p>The result type itself changes with the input value.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Dependent Function</p>
-            <h2>Case analysis now refines types too</h2>
-            <div class="split-layout">
-              <pre data-id="dependent-flow"><code class="language-lean" data-trim>
+- The result type itself changes with the input value.
+- The familiar `if ... then ... else ...` appears inside the type.
+
+--
+
+## Pattern matching refines the type too
+
+```nohighlight
 def natOrStringThree (b : Bool) : if b then Nat else String :=
   match b with
   | true => (3 : Nat)
   | false => "three"
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Computation + typing</h3>
-                  <p>Pattern matching is no longer only choosing a branch at runtime. It also sharpens the static type in each branch.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>New flow of information</h3>
-                  <p>Values can refine types.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Indexed Data</p>
-            <h2>What if a collection remembered its length?</h2>
-            <div class="split-layout">
-              <pre data-id="vect-flow"><code class="language-lean" data-trim>
+- Pattern matching chooses a branch at runtime.
+- It also sharpens the static type in each branch.
+- Values can refine types.
+
+--
+
+## What if a collection remembered its length?
+
+```nohighlight
 inductive Vect (α : Type) : Nat → Type where
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Not one type</h3>
-                  <p><code>Vect α n</code> is a family of types indexed by a natural number.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>Interpretation</h3>
-                  <p>Read it as "vectors of elements of type <code>α</code> and length <code>n</code>."</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Indexed Data</p>
-            <h2>The constructors carry the length story</h2>
-            <div class="split-layout">
-              <pre data-id="vect-flow"><code class="language-lean" data-trim>
+- `Vect α n` is a family of types indexed by a natural number.
+- Read it as vectors of `α` with length `n`.
+
+--
+
+## The constructors carry the length story
+
+```nohighlight
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Empty vector</h3>
-                  <p>`nil` can only construct a vector whose length index is exactly <code>0</code>.</p>
-                </article>
-                <article class="callout-card emphasis">
-                  <h3>Invariant in the type</h3>
-                  <p>The constructor itself tells Lean what length has been built.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Indexed Data</p>
-            <h2>Adding one element changes the index too</h2>
-            <div class="split-layout">
-              <pre data-id="vect-flow"><code class="language-lean" data-trim>
+- `nil` can only build a vector of length `0`.
+- The invariant is already visible in the constructor.
+
+--
+
+## Adding one element changes the index too
+
+```nohighlight
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
   | cons : α → {n : Nat} → Vect α n → Vect α (n + 1)
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Constructor discipline</h3>
-                  <p>Adding an element changes the type from length <code>n</code> to length <code>n + 1</code>.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>Syntax note</h3>
-                  <p><code>{n : Nat}</code> is an implicit argument, kept off most later uses so the slides stay readable.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section class="frame-slide">
-            <p class="eyebrow">Primary Wow Moment</p>
-            <h2>`Vect.zip` has no mismatched-length cases</h2>
-            <div class="two-column">
-              <div class="code-card">
-                <pre><code class="language-lean" data-trim>
+- Adding an element changes the type from length `n` to `n + 1`.
+- The constructor enforces that change statically.
+
+--
+
+## `Vect.zip` has no mismatched-length cases
+
+```nohighlight
 def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
   | Vect.nil, Vect.nil => Vect.nil
   | Vect.cons x xs, Vect.cons y ys =>
       Vect.cons (x, y) (Vect.zip xs ys)
-                </code></pre>
-              </div>
-              <div class="callout-stack">
-                <article class="callout-card emphasis">
-                  <h3>Ask the room</h3>
-                  <p>Where are the unequal-length branches?</p>
-                </article>
-                <article class="callout-card">
-                  <h3>Answer</h3>
-                  <p>They are not missing by accident. The type already ruled them out.</p>
-                </article>
-                <article class="callout-card">
-                  <h3>Payoff</h3>
-                  <p>A runtime check has been moved into a compile-time guarantee.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section class="frame-slide">
-            <p class="eyebrow">Formal Lens</p>
-            <h2>The type checker knows more</h2>
-            <div class="taxonomy-grid">
-              <article class="taxonomy-card">
-                <p class="taxonomy-label">Ordinary function type</p>
-                <pre><code class="language-lean" data-trim>
-Nat → Nat
-                </code></pre>
-              </article>
-              <article class="taxonomy-card">
-                <p class="taxonomy-label">Type constructor</p>
-                <pre><code class="language-lean" data-trim>
-List : Type → Type
-                </code></pre>
-              </article>
-              <article class="taxonomy-card">
-                <p class="taxonomy-label">Indexed family</p>
-                <pre><code class="language-lean" data-trim>
-Vect : Type → Nat → Type
-                </code></pre>
-              </article>
-              <article class="taxonomy-card">
-                <p class="taxonomy-label">Dependent function</p>
-                <pre><code class="language-lean" data-trim>
-(b : Bool) → if b then Nat else String
-                </code></pre>
-              </article>
-            </div>
-            <p class="closing-line">Once types can express richer invariants, theorem proving stops feeling like an unrelated extra.</p>
-          </section>
+- Both inputs share the same length index `n`.
+- Unequal-length branches are not missing by accident.
+- A runtime check becomes a compile-time guarantee.
+
+--
+
+## The type checker knows more
+
+- **Ordinary function type**: `Nat → Nat`
+- **Type constructor**: `List : Type → Type`
+- **Indexed family**: `Vect : Type → Nat → Type`
+- **Dependent function**: `(b : Bool) → if b then Nat else String`
+
+Once types express richer invariants, theorem proving stops feeling like an unrelated extra.
+<!-- .element: class="subtitle" -->
+          </script>
         </section>
 
+        <section
+          data-markdown
+          data-separator="^\r?\n---\r?\n$"
+          data-separator-vertical="^\r?\n--\r?\n$"
+        >
+          <script type="text/template">
+<!-- .slide: class="r-vstack justify-center section-slide" -->
 
-        <section>
-          <section class="section-divider">
-            <p class="eyebrow">Part IV</p>
-            <h2>Theorem proving is the same story pushed further</h2>
-            <p class="divider-text">
-              A theorem statement is another typed object inside the same language. A proof is evidence for it.
-            </p>
-            <div class="section-track">
-              <span>Programs</span>
-              <span>Types</span>
-              <span class="track-active">Proofs</span>
-            </div>
-          </section>
+## Theorem proving is the same story pushed further
+<!-- .element: class="r-fit-text" -->
 
-          <section class="frame-slide">
-            <p class="eyebrow">Propositions</p>
-            <h2>`Bool` and `Prop` are not the same thing</h2>
-            <div class="code-grid two-up">
-              <article class="code-card">
-                <h3>Boolean values</h3>
-                <pre><code class="language-lean" data-trim>
+A theorem statement is another typed object inside the same language. A proof is evidence for it.
+
+--
+
+## `Bool` and `Prop` are different
+
+### Boolean values
+
+```nohighlight
 #check true
 #check false
-                </code></pre>
-                <p>These are data values of type <code>Bool</code>.</p>
-              </article>
-              <article class="code-card">
-                <h3>Propositions</h3>
-                <pre><code class="language-lean" data-trim>
+```
+
+These are values of type `Bool`.
+<!-- .element: class="subtitle" -->
+
+### Propositions
+
+```nohighlight
 #check True
 #check False
-                </code></pre>
-                <p>These live in <code>Prop</code>, where theorem statements are expressed.</p>
-              </article>
-            </div>
-            <p class="closing-line">Logic is not entering from outside the language. It is represented inside the same type-theoretic framework.</p>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">A Theorem Statement</p>
-            <h2>Lean asks for evidence, not persuasion</h2>
-            <div class="split-layout">
-              <pre data-id="keep-first-flow"><code class="language-lean" data-trim>
+These live in `Prop`, where theorem statements are expressed.
+<!-- .element: class="subtitle" -->
+
+Logic is represented inside the same type-theoretic language.
+<!-- .element: class="subtitle" -->
+
+--
+
+## Lean asks for evidence, not persuasion
+
+```nohighlight
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := ?
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Read it like a strict signature</h3>
-                  <p>Assume propositions <code>p</code> and <code>q</code>, plus evidence <code>hp : p</code> and <code>hq : q</code>. Produce evidence for <code>p</code>.</p>
-                </article>
-                <article class="callout-card emphasis">
-                  <h3>The hole matters</h3>
-                  <p>It makes Lean's demand explicit: fill in a term of the required type.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">A Theorem Statement</p>
-            <h2>The smallest proof looks like returning a value</h2>
-            <div class="split-layout">
-              <pre data-id="keep-first-flow"><code class="language-lean" data-trim>
+- Assume `p`, `q`, `hp : p`, and `hq : q`.
+- The goal is to produce a term of type `p`.
+
+--
+
+## The smallest proof looks like returning a value
+
+```nohighlight
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Proof as program</h3>
-                  <p>The goal asked for evidence of type <code>p</code>, and <code>hp</code> already has that type.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>Why this lands</h3>
-                  <p>It does not feel like a separate proof language. It feels like returning the needed value.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section class="frame-slide">
-            <p class="eyebrow">Structured Evidence</p>
-            <h2>Conjunction behaves like data with constructors and projections</h2>
-            <div class="two-column">
-              <div class="code-card">
-                <pre><code class="language-lean" data-trim>
+- The goal asks for evidence of type `p`.
+- `hp` already has that type.
+- A proof can be as small as returning the needed value.
+
+--
+
+## Conjunction behaves like structured data
+
+```nohighlight
 #check And.intro
 #check And.left
 #check And.right
-                </code></pre>
-              </div>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>`And.intro`</h3>
-                  <p>Build evidence for <code>p ∧ q</code> from evidence for each side.</p>
-                </article>
-                <article class="callout-card">
-                  <h3>`And.left` / `And.right`</h3>
-                  <p>Project the left or right piece back out.</p>
-                </article>
-                <article class="callout-card emphasis">
-                  <h3>Same pattern again</h3>
-                  <p>Build, extract, reassemble. The proof story mirrors typed programming.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Proof Terms</p>
-            <h2>A larger proof is still just composition</h2>
-            <div class="split-layout">
-              <pre data-id="and-proof-flow"><code class="language-lean" data-trim>
+- `And.intro` builds evidence for `p ∧ q`.
+- `And.left` and `And.right` project the two parts back out.
+- Proof structure mirrors typed programming structure.
+
+--
+
+## A larger proof is still just composition
+
+```nohighlight
 theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
   And.intro (And.right hpq) (And.left hpq)
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>Read it like a recipe</h3>
-                  <p>Take the right part, take the left part, then rebuild the conjunction in the opposite order.</p>
-                </article>
-                <article class="callout-card muted">
-                  <h3>Conceptual point</h3>
-                  <p>Logical connectives behave like structured data with introduction and elimination rules.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section data-auto-animate data-auto-animate-unmatched="fade" class="frame-slide">
-            <p class="eyebrow">Tactic Mode</p>
-            <h2>The same proof can be built interactively</h2>
-            <div class="split-layout">
-              <pre data-id="and-proof-flow"><code class="language-lean" data-trim>
+- `And.right hpq` extracts the proof of `q`.
+- `And.left hpq` extracts the proof of `p`.
+- `And.intro` rebuilds them as `q ∧ p`.
+
+--
+
+## The same proof can be built interactively
+
+```nohighlight
 theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
   apply And.intro
   exact And.right hpq
   exact And.left hpq
-              </code></pre>
-              <div class="callout-stack">
-                <article class="callout-card">
-                  <h3>`by` opens tactic mode</h3>
-                  <p>Lean can guide proof construction step by step.</p>
-                </article>
-                <article class="callout-card emphasis">
-                  <h3>What did not change</h3>
-                  <p>The theorem is the same. The underlying proof object is the same kind of thing.</p>
-                </article>
-              </div>
-            </div>
-          </section>
+```
 
-          <section class="frame-slide">
-            <p class="eyebrow">Structural Unity</p>
-            <h2>Recursion and induction have the same shape</h2>
-            <div class="compare-grid">
-              <article class="compare-card">
-                <h3>Recursive program on `Nat`</h3>
-                <pre><code class="language-lean" data-trim>
+- `by` opens tactic mode.
+- Lean can guide proof construction step by step.
+- The theorem is the same; only the proof style changes.
+
+--
+
+## Recursion and induction have the same shape
+
+### Recursive program on `Nat`
+
+```nohighlight
 def f : Nat → ...
   | Nat.zero => ...
   | Nat.succ k => ... f k ...
-                </code></pre>
-              </article>
-              <article class="compare-card">
-                <h3>Induction proof on `Nat`</h3>
-                <pre><code class="language-lean" data-trim>
+```
+
+### Induction proof on `Nat`
+
+```nohighlight
 theorem h : ∀ n : Nat, P n
   | Nat.zero => ...
   | Nat.succ k => ... h k ...
-                </code></pre>
-              </article>
-            </div>
-            <p class="closing-line">That parallel is not a coincidence. It comes from the same inductive structure we started with in the programming part of the talk.</p>
-          </section>
+```
+
+The parallel comes from the same inductive structure introduced in the programming part of the talk.
+<!-- .element: class="subtitle" -->
+          </script>
         </section>
 
+        <section
+          data-markdown
+          data-separator="^\r?\n---\r?\n$"
+          data-separator-vertical="^\r?\n--\r?\n$"
+        >
+          <script type="text/template">
+<!-- .slide: class="r-vstack justify-center section-slide" -->
 
-        <section class="frame-slide final-slide">
-          <p class="eyebrow">Part V / Synthesis</p>
-          <h2>The core idea of Lean</h2>
-          <div class="roadmap-grid">
-            <article class="roadmap-card">
-              <span class="roadmap-index">01</span>
-              <h3>Start with ordinary typed programming</h3>
-              <p>Expressions, functions, data, and recursion are already enough to build the baseline model.</p>
-            </article>
-            <article class="roadmap-card">
-              <span class="roadmap-index">02</span>
-              <h3>Let types track more meaning</h3>
-              <p>Dependent types weaken the boundary between values and types so invariants survive at compile time.</p>
-            </article>
-            <article class="roadmap-card">
-              <span class="roadmap-index">03</span>
-              <h3>Read proofs as programs</h3>
-              <p>A specification becomes a type, and a proof is a term inhabiting that type.</p>
-            </article>
-          </div>
-          <div class="summary-banner">
-            <p>
-              Lean is not a bag of advanced features. It is the unification of programming, typing, and proving in one language.
-            </p>
-          </div>
-          <p class="muted-note">
-            If you want the theory labels after the examples: dependent type theory with inductive types, and the practical intuition behind Curry-Howard.
-          </p>
+## The core idea of Lean
+
+1. Start with ordinary typed programming.
+2. Let types track more meaning.
+3. Read proofs as programs.
+
+Lean unifies programming, typing, and proving in one language. <!-- .element: class="lead" -->
+          </script>
         </section>
-
       </div>
     </div>
 
     <script src="vendor/reveal/dist/reveal.js"></script>
+    <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
     <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
-    <script src="vendor/reveal/plugin/notes/notes.js"></script>
     <script>
       const deck = new Reveal({
         hash: true,
         center: false,
-        width: 1440,
-        height: 810,
-        margin: 0.06,
-        transition: "fade",
+        width: "100%",
+        height: "100%",
+        margin: 0.04,
+        scrollActivationWidth: null,
         pdfSeparateFragments: false,
-        plugins: [RevealHighlight, RevealNotes]
+        plugins: [RevealMarkdown, RevealHighlight]
       });
 
       deck.initialize();

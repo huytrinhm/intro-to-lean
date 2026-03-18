@@ -7,7 +7,7 @@ This repository contains a Reveal.js presentation about Lean, plus the two Lean 
 
 The presentation lives in `presentation/`.
 
-The editable slide sources live in `presentation/src/`. The published `presentation/index.html` is generated from those source files by `presentation/build-slides.mjs`.
+The editable slide sources live in `presentation/src/`. The published `presentation/index.html` is generated from those HTML and Markdown source files by `presentation/build-slides.mjs`.
 
 ## Clone
 
