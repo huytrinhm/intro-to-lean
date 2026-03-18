@@ -1,8 +1,9 @@
 <!-- .slide: class="section-slide" -->
 
-## Proof terms
-
-Propositions in `Prop`, proofs as terms.
+<div class="r-vstack justify-center section-flow">
+  <h2>Proof terms</h2>
+  <p>Propositions in <code>Prop</code>, proofs as terms.</p>
+</div>
 
 --
 

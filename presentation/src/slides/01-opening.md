@@ -1,15 +1,18 @@
 <!-- .slide: class="opening-slide" -->
 
-<img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
+<div class="r-vstack justify-center items-start opening-flow">
+  <img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
 
-# Lean: From Functional Programming to Theorem Proving
+  <h1>Lean: From Functional Programming to Theorem Proving</h1>
 
-Programs, value-indexed types, and proofs in one typed language.
-<!-- .element: class="lead" -->
+  <p class="lead">Programs, value-indexed types, and proofs in one typed language.</p>
 
-1. Functional core. <!-- .element: class="fragment fade-up" -->
-2. Dependent types. <!-- .element: class="fragment fade-up" -->
-3. Proof terms. <!-- .element: class="fragment fade-up" -->
+  <ol>
+    <li class="fragment fade-up">Functional core.</li>
+    <li class="fragment fade-up">Dependent types.</li>
+    <li class="fragment fade-up">Proof terms.</li>
+  </ol>
+</div>
 
 ---
 

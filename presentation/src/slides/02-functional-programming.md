@@ -1,8 +1,9 @@
 <!-- .slide: class="section-slide" -->
 
-## Functional core
-
-Typed definitions, inductive data, structural recursion.
+<div class="r-vstack justify-center section-flow">
+  <h2>Functional core</h2>
+  <p>Typed definitions, inductive data, structural recursion.</p>
+</div>
 
 --
 

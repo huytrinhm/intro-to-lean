@@ -2,7 +2,7 @@
 
 This directory now contains a local Reveal.js presentation built from the talk outline in `lean-presentation-plan.md`.
 
-The authoring source is split across `src/template.html` and `src/slides/*.{html,md}`. The top-level `index.html` in this directory is generated output for static hosting.
+The authoring source is split across `src/template.html` and `src/slides/*.md`. The top-level `index.html` in this directory is generated output for static hosting.
 
 ## Run
 
@@ -23,7 +23,7 @@ Then open `http://127.0.0.1:8000`.
 ## Files
 
 - `src/template.html`: the outer deck shell
-- `src/slides/`: slide fragments grouped by presentation section, written in either HTML or Markdown
+- `src/slides/`: Markdown slide fragments grouped by presentation section
 - `build-slides.mjs`: regenerates `index.html` from the split source files
 - `index.html`: generated slide deck for static hosting
 - `styles.css`: the custom theme
@@ -33,14 +33,14 @@ Then open `http://127.0.0.1:8000`.
 
 ## Authoring
 
-- Use `.html` slide files when you want full Reveal markup control.
-- Use `.md` slide files when you want easier editing. The build step wraps them in Reveal's built-in `data-markdown` sections.
+- Use `.md` slide files. The build step wraps them in Reveal's built-in `data-markdown` sections.
 - Markdown files may mix multiple slides in one file:
   - `---` starts a new horizontal slide.
   - `--` starts a new vertical slide within the current stack.
 - Use Reveal's Markdown comment syntax for attributes:
   - `<!-- .slide: class="r-vstack justify-center section-slide" -->`
   - `Text here <!-- .element: class="fragment" -->`
+- Markdown slides get `content-slide` by default during the build unless they already declare their own `<!-- .slide: ... -->` attributes.
 - Raw HTML is still allowed inside Markdown when a slide needs more control.
 
 ## Notes

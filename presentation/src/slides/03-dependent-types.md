@@ -1,8 +1,9 @@
 <!-- .slide: class="section-slide" -->
 
-## Dependent types
-
-Types can mention values.
+<div class="r-vstack justify-center section-flow">
+  <h2>Dependent types</h2>
+  <p>Types can mention values.</p>
+</div>
 
 --
 

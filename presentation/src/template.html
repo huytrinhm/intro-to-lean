@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lean Presentation</title>
+    <link rel="icon" href="assets/logo/lean_logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
     <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css">
-    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="vendor/highlightjs/stackoverflow-light.min.css">
+    <link rel="stylesheet" href="styles.css?v=20260318">
   </head>
   <body>
     <div class="reveal">
@@ -24,16 +25,14 @@
       const deck = new Reveal({
         hash: true,
         center: false,
-        width: "100%",
-        height: "100%",
-        margin: 0.04,
+        width: 1280,
+        height: 720,
+        margin: 0.1,
         scrollActivationWidth: null,
         pdfSeparateFragments: false,
         highlight: {
           beforeHighlight: (hljs) => {
-            if (window.revealLeanLanguage && !hljs.getLanguage("lean")) {
-              hljs.registerLanguage("lean", window.revealLeanLanguage);
-            }
+            hljs.registerLanguage("lean", window.revealLeanLanguage);
           }
         },
         plugins: [RevealMarkdown, RevealHighlight]

@@ -17,7 +17,7 @@
         "calc  match do  by let in extends " +
         "fun assume " +
         "#check #eval #reduce #print " +
-        "λ ∀ ∃ ⨁ Π",
+        "λ ∀ ∃ ⨁ Π sorry admit",
       built_in:
         "Type Prop|10 Sort rw|10 rewrite rwa erw subst substs " +
         "simp dsimp simpa simp_intros finish " +
@@ -37,7 +37,6 @@
       literal: "tt ff",
       meta: "noncomputable|10 private protected meta mutual",
       section: "section namespace end",
-      sorry: "sorry admit",
       symbol: ":="
     };
 
@@ -64,7 +63,6 @@
     };
 
     const LEAN_DEFINITION = {
-      className: "theorem",
       beginKeywords: "def theorem lemma class instance structure",
       end: /:=/,
       excludeEnd: true,
