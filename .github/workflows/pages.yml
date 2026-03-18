@@ -22,8 +22,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+
+      - name: Build presentation
+        run: node presentation/build-slides.mjs
 
       - name: Upload presentation artifact
         uses: actions/upload-pages-artifact@v4

@@ -7,6 +7,8 @@ This repository contains a Reveal.js presentation about Lean, plus the two Lean 
 
 The presentation lives in `presentation/`.
 
+The editable slide sources live in `presentation/src/`. The published `presentation/index.html` is generated from those source files by `presentation/build-slides.mjs`.
+
 ## Clone
 
 ```bash
@@ -22,6 +24,7 @@ git submodule update --init --recursive
 ## Local preview
 
 ```bash
+node presentation/build-slides.mjs
 cd presentation
 python3 -m http.server 8000
 ```
@@ -30,7 +33,7 @@ Then open `http://127.0.0.1:8000`.
 
 ## GitHub Pages
 
-The workflow in `.github/workflows/pages.yml` deploys the contents of `presentation/` to GitHub Pages on pushes to `main`.
+The workflow in `.github/workflows/pages.yml` rebuilds the slides from `presentation/src/` and deploys the contents of `presentation/` to GitHub Pages on pushes to `main`.
 
 After pushing this repository to GitHub:
 

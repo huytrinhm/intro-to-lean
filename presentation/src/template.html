@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lean Presentation</title>
+    <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
+    <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css">
+    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+{{SLIDES}}
+      </div>
+    </div>
+
+    <script src="vendor/reveal/dist/reveal.js"></script>
+    <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+    <script src="vendor/reveal/plugin/notes/notes.js"></script>
+    <script>
+      const deck = new Reveal({
+        hash: true,
+        controls: true,
+        progress: true,
+        slideNumber: "c/t",
+        center: false,
+        width: 1440,
+        height: 810,
+        margin: 0.06,
+        transition: "slide",
+        backgroundTransition: "fade",
+        autoAnimateDuration: 0.55,
+        autoAnimateEasing: "ease-out",
+        pdfSeparateFragments: false,
+        plugins: [RevealHighlight, RevealNotes]
+      });
+
+      deck.initialize();
+    </script>
+  </body>
+</html>
