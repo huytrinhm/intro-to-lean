@@ -11,14 +11,14 @@ Before dependent types and proofs, Lean already looks like a typed functional la
 
 ### `#check`
 
-```nohighlight
+```language-lean
 #check 1
 #check true
 ```
 
 ### `#eval`
 
-```nohighlight
+```language-lean
 #eval 1 + 2
 ```
 
@@ -30,7 +30,7 @@ Before dependent types and proofs, Lean already looks like a typed functional la
 
 ## Start with a named value
 
-```nohighlight
+```language-lean
 def hello : String := "Hello"
 ```
 
@@ -42,7 +42,7 @@ def hello : String := "Hello"
 
 ## Turn the definition into a function
 
-```nohighlight
+```language-lean
 def add1 (n : Nat) : Nat := n + 1
 ```
 
@@ -53,7 +53,7 @@ def add1 (n : Nat) : Nat := n + 1
 
 ## Multiple parameters are still ordinary typed programming
 
-```nohighlight
+```language-lean
 def addTwo (n : Nat) (k : Nat) : Nat := n + k
 ```
 
@@ -64,7 +64,7 @@ def addTwo (n : Nat) (k : Nat) : Nat := n + k
 
 ## Data is defined by its constructors
 
-```nohighlight
+```language-lean []
 inductive Bool where
   | false : Bool
   | true : Bool
@@ -77,7 +77,7 @@ inductive Bool where
 
 ## Constructors build data; `match` consumes it
 
-```nohighlight
+```language-lean []
 def notBool (b : Bool) : Bool :=
   match b with
   | Bool.false => Bool.true
@@ -91,7 +91,7 @@ def notBool (b : Bool) : Bool :=
 
 ## Natural numbers are inductive too
 
-```nohighlight
+```language-lean []
 inductive Nat where
   | zero : Nat
   | succ (n : Nat) : Nat
@@ -104,7 +104,7 @@ inductive Nat where
 
 ## Recursive programs follow the same shape
 
-```nohighlight
+```language-lean []
 def double (n : Nat) : Nat :=
   match n with
   | Nat.zero => Nat.zero
@@ -124,7 +124,7 @@ def double (n : Nat) : Nat :=
 
 ### Type constructors already vary with types
 
-```nohighlight
+```language-lean
 List : Type → Type
 List Nat
 List String

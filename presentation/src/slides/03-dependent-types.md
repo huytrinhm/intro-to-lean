@@ -9,7 +9,7 @@ Dependent types preserve relationships that ordinary types forget.
 
 ## Ordinary types are sometimes too weak
 
-```nohighlight
+```language-lean
 List α → List β → List (α × β)
 ```
 
@@ -25,7 +25,7 @@ Element types are remembered. Equal length is not.
 
 ## A return type can depend on the input value
 
-```nohighlight
+```language-lean
 (b : Bool) → if b then Nat else String
 ```
 
@@ -36,7 +36,7 @@ Element types are remembered. Equal length is not.
 
 ## Pattern matching refines the type too
 
-```nohighlight
+```language-lean []
 def natOrStringThree (b : Bool) : if b then Nat else String :=
   match b with
   | true => (3 : Nat)
@@ -51,7 +51,7 @@ def natOrStringThree (b : Bool) : if b then Nat else String :=
 
 ## What if a collection remembered its length?
 
-```nohighlight
+```language-lean
 inductive Vect (α : Type) : Nat → Type where
 ```
 
@@ -62,7 +62,7 @@ inductive Vect (α : Type) : Nat → Type where
 
 ## The constructors carry the length story
 
-```nohighlight
+```language-lean
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
 ```
@@ -74,7 +74,7 @@ inductive Vect (α : Type) : Nat → Type where
 
 ## Adding one element changes the index too
 
-```nohighlight
+```language-lean []
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
   | cons : α → {n : Nat} → Vect α n → Vect α (n + 1)
@@ -87,7 +87,7 @@ inductive Vect (α : Type) : Nat → Type where
 
 ## `Vect.zip` has no mismatched-length cases
 
-```nohighlight
+```language-lean []
 def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
   | Vect.nil, Vect.nil => Vect.nil
   | Vect.cons x xs, Vect.cons y ys =>

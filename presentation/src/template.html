@@ -6,6 +6,7 @@
     <title>Lean Presentation</title>
     <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
     <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css">
+    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -18,6 +19,7 @@
     <script src="vendor/reveal/dist/reveal.js"></script>
     <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
     <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+    <script src="vendor/highlightjs-lean/lean.js"></script>
     <script>
       const deck = new Reveal({
         hash: true,
@@ -27,6 +29,13 @@
         margin: 0.04,
         scrollActivationWidth: null,
         pdfSeparateFragments: false,
+        highlight: {
+          beforeHighlight: (hljs) => {
+            if (window.revealLeanLanguage && !hljs.getLanguage("lean")) {
+              hljs.registerLanguage("lean", window.revealLeanLanguage);
+            }
+          }
+        },
         plugins: [RevealMarkdown, RevealHighlight]
       });
 

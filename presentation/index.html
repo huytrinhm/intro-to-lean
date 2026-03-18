@@ -7,6 +7,7 @@
     <title>Lean Presentation</title>
     <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
     <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css">
+    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -18,7 +19,7 @@
           data-separator-vertical="^\r?\n--\r?\n$"
         >
           <script type="text/template">
-<!-- .slide: class="r-vstack items-start justify-center" -->
+<!-- .slide: class="r-vstack items-start justify-center opening-slide" -->
 
 <img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
 
@@ -75,14 +76,14 @@ Before dependent types and proofs, Lean already looks like a typed functional la
 
 ### `#check`
 
-```nohighlight
+```language-lean
 #check 1
 #check true
 ```
 
 ### `#eval`
 
-```nohighlight
+```language-lean
 #eval 1 + 2
 ```
 
@@ -94,7 +95,7 @@ Before dependent types and proofs, Lean already looks like a typed functional la
 
 ## Start with a named value
 
-```nohighlight
+```language-lean
 def hello : String := "Hello"
 ```
 
@@ -106,7 +107,7 @@ def hello : String := "Hello"
 
 ## Turn the definition into a function
 
-```nohighlight
+```language-lean
 def add1 (n : Nat) : Nat := n + 1
 ```
 
@@ -117,7 +118,7 @@ def add1 (n : Nat) : Nat := n + 1
 
 ## Multiple parameters are still ordinary typed programming
 
-```nohighlight
+```language-lean
 def addTwo (n : Nat) (k : Nat) : Nat := n + k
 ```
 
@@ -128,7 +129,7 @@ def addTwo (n : Nat) (k : Nat) : Nat := n + k
 
 ## Data is defined by its constructors
 
-```nohighlight
+```language-lean []
 inductive Bool where
   | false : Bool
   | true : Bool
@@ -141,7 +142,7 @@ inductive Bool where
 
 ## Constructors build data; `match` consumes it
 
-```nohighlight
+```language-lean []
 def notBool (b : Bool) : Bool :=
   match b with
   | Bool.false => Bool.true
@@ -155,7 +156,7 @@ def notBool (b : Bool) : Bool :=
 
 ## Natural numbers are inductive too
 
-```nohighlight
+```language-lean []
 inductive Nat where
   | zero : Nat
   | succ (n : Nat) : Nat
@@ -168,7 +169,7 @@ inductive Nat where
 
 ## Recursive programs follow the same shape
 
-```nohighlight
+```language-lean []
 def double (n : Nat) : Nat :=
   match n with
   | Nat.zero => Nat.zero
@@ -188,7 +189,7 @@ def double (n : Nat) : Nat :=
 
 ### Type constructors already vary with types
 
-```nohighlight
+```language-lean
 List : Type → Type
 List Nat
 List String
@@ -216,7 +217,7 @@ Dependent types preserve relationships that ordinary types forget.
 
 ## Ordinary types are sometimes too weak
 
-```nohighlight
+```language-lean
 List α → List β → List (α × β)
 ```
 
@@ -232,7 +233,7 @@ Element types are remembered. Equal length is not.
 
 ## A return type can depend on the input value
 
-```nohighlight
+```language-lean
 (b : Bool) → if b then Nat else String
 ```
 
@@ -243,7 +244,7 @@ Element types are remembered. Equal length is not.
 
 ## Pattern matching refines the type too
 
-```nohighlight
+```language-lean []
 def natOrStringThree (b : Bool) : if b then Nat else String :=
   match b with
   | true => (3 : Nat)
@@ -258,7 +259,7 @@ def natOrStringThree (b : Bool) : if b then Nat else String :=
 
 ## What if a collection remembered its length?
 
-```nohighlight
+```language-lean
 inductive Vect (α : Type) : Nat → Type where
 ```
 
@@ -269,7 +270,7 @@ inductive Vect (α : Type) : Nat → Type where
 
 ## The constructors carry the length story
 
-```nohighlight
+```language-lean
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
 ```
@@ -281,7 +282,7 @@ inductive Vect (α : Type) : Nat → Type where
 
 ## Adding one element changes the index too
 
-```nohighlight
+```language-lean []
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
   | cons : α → {n : Nat} → Vect α n → Vect α (n + 1)
@@ -294,7 +295,7 @@ inductive Vect (α : Type) : Nat → Type where
 
 ## `Vect.zip` has no mismatched-length cases
 
-```nohighlight
+```language-lean []
 def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
   | Vect.nil, Vect.nil => Vect.nil
   | Vect.cons x xs, Vect.cons y ys =>
@@ -338,7 +339,7 @@ A theorem statement is another typed object inside the same language. A proof is
 
 ### Boolean values
 
-```nohighlight
+```language-lean
 #check true
 #check false
 ```
@@ -348,7 +349,7 @@ These are values of type `Bool`.
 
 ### Propositions
 
-```nohighlight
+```language-lean
 #check True
 #check False
 ```
@@ -363,7 +364,7 @@ Logic is represented inside the same type-theoretic language.
 
 ## Lean asks for evidence, not persuasion
 
-```nohighlight
+```language-lean
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := ?
 ```
 
@@ -374,7 +375,7 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := ?
 
 ## The smallest proof looks like returning a value
 
-```nohighlight
+```language-lean
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 ```
 
@@ -386,7 +387,7 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 
 ## Conjunction behaves like structured data
 
-```nohighlight
+```language-lean
 #check And.intro
 #check And.left
 #check And.right
@@ -400,7 +401,7 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 
 ## A larger proof is still just composition
 
-```nohighlight
+```language-lean
 theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
   And.intro (And.right hpq) (And.left hpq)
 ```
@@ -413,7 +414,7 @@ theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
 
 ## The same proof can be built interactively
 
-```nohighlight
+```language-lean []
 theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
   apply And.intro
   exact And.right hpq
@@ -430,7 +431,7 @@ theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
 
 ### Recursive program on `Nat`
 
-```nohighlight
+```language-lean []
 def f : Nat → ...
   | Nat.zero => ...
   | Nat.succ k => ... f k ...
@@ -438,7 +439,7 @@ def f : Nat → ...
 
 ### Induction proof on `Nat`
 
-```nohighlight
+```language-lean []
 theorem h : ∀ n : Nat, P n
   | Nat.zero => ...
   | Nat.succ k => ... h k ...
@@ -472,6 +473,7 @@ Lean unifies programming, typing, and proving in one language. <!-- .element: cl
     <script src="vendor/reveal/dist/reveal.js"></script>
     <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
     <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+    <script src="vendor/highlightjs-lean/lean.js"></script>
     <script>
       const deck = new Reveal({
         hash: true,
@@ -481,6 +483,13 @@ Lean unifies programming, typing, and proving in one language. <!-- .element: cl
         margin: 0.04,
         scrollActivationWidth: null,
         pdfSeparateFragments: false,
+        highlight: {
+          beforeHighlight: (hljs) => {
+            if (window.revealLeanLanguage && !hljs.getLanguage("lean")) {
+              hljs.registerLanguage("lean", window.revealLeanLanguage);
+            }
+          }
+        },
         plugins: [RevealMarkdown, RevealHighlight]
       });
 

@@ -11,7 +11,7 @@ A theorem statement is another typed object inside the same language. A proof is
 
 ### Boolean values
 
-```nohighlight
+```language-lean
 #check true
 #check false
 ```
@@ -21,7 +21,7 @@ These are values of type `Bool`.
 
 ### Propositions
 
-```nohighlight
+```language-lean
 #check True
 #check False
 ```
@@ -36,7 +36,7 @@ Logic is represented inside the same type-theoretic language.
 
 ## Lean asks for evidence, not persuasion
 
-```nohighlight
+```language-lean
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := ?
 ```
 
@@ -47,7 +47,7 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := ?
 
 ## The smallest proof looks like returning a value
 
-```nohighlight
+```language-lean
 theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 ```
 
@@ -59,7 +59,7 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 
 ## Conjunction behaves like structured data
 
-```nohighlight
+```language-lean
 #check And.intro
 #check And.left
 #check And.right
@@ -73,7 +73,7 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 
 ## A larger proof is still just composition
 
-```nohighlight
+```language-lean
 theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
   And.intro (And.right hpq) (And.left hpq)
 ```
@@ -86,7 +86,7 @@ theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
 
 ## The same proof can be built interactively
 
-```nohighlight
+```language-lean []
 theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
   apply And.intro
   exact And.right hpq
@@ -103,7 +103,7 @@ theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
 
 ### Recursive program on `Nat`
 
-```nohighlight
+```language-lean []
 def f : Nat → ...
   | Nat.zero => ...
   | Nat.succ k => ... f k ...
@@ -111,7 +111,7 @@ def f : Nat → ...
 
 ### Induction proof on `Nat`
 
-```nohighlight
+```language-lean []
 theorem h : ∀ n : Nat, P n
   | Nat.zero => ...
   | Nat.succ k => ... h k ...

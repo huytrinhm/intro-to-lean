@@ -9,6 +9,14 @@
   --deck-border: #d9dde2;
   --deck-muted: #5d6670;
   --deck-soft: #f7f8fa;
+  --deck-heading-width: 16em;
+  --deck-copy-width: 29em;
+  --deck-code-width: 30em;
+  --deck-code-border: #1e201c;
+  --deck-code-shadow: 0 18px 42px rgba(22, 26, 29, 0.14);
+  --deck-code-gutter: rgba(255, 255, 255, 0.28);
+  --deck-code-line: rgba(255, 255, 255, 0.06);
+  --deck-code-line-accent: #66d9ef;
 }
 
 html,
@@ -23,7 +31,7 @@ body {
 .reveal .slides section {
   box-sizing: border-box;
   height: 100%;
-  padding: 44px 56px;
+  padding: 52px 72px 58px;
 }
 
 .reveal h1 {
@@ -37,6 +45,30 @@ body {
 .reveal p,
 .reveal li {
   line-height: 1.35;
+}
+
+.reveal .slides section:not(.section-slide) > h2 {
+  max-width: var(--deck-heading-width);
+  margin-bottom: 0.48em;
+}
+
+.reveal .slides section:not(.section-slide) > h3 {
+  margin-top: 0.4em;
+  margin-bottom: 0.18em;
+}
+
+.reveal .slides section:not(.section-slide) > :is(p, ul, ol) {
+  max-width: var(--deck-copy-width);
+}
+
+.reveal .slides section:not(.section-slide) > pre {
+  max-width: var(--deck-code-width);
+}
+
+.reveal .slides section:not(.section-slide) > p + :is(ul, ol, pre),
+.reveal .slides section:not(.section-slide) > h3 + pre,
+.reveal .slides section:not(.section-slide) > h3 + p {
+  margin-top: 0.2em;
 }
 
 .reveal ul,
@@ -64,7 +96,7 @@ body {
 }
 
 .reveal pre {
-  width: 100%;
+  width: min(100%, var(--deck-code-width));
   margin: 0.4em 0;
   box-shadow: none;
   font-size: 0.58em;
@@ -75,12 +107,47 @@ body {
 .reveal .hljs {
   display: block;
   max-height: none;
-  padding: 0.85em 1em;
-  border: 1px solid var(--deck-border);
-  border-radius: 6px;
-  background: var(--deck-soft);
-  color: inherit;
-  box-shadow: none;
+  padding: 0.95em 1.15em;
+  border: 1px solid var(--deck-code-border);
+  border-radius: 12px;
+  box-shadow: var(--deck-code-shadow);
+  tab-size: 2;
+}
+
+.reveal .hljs-ln {
+  width: 100%;
+}
+
+.reveal .hljs-ln td {
+  padding: 0;
+  border: 0;
+  vertical-align: top;
+}
+
+.reveal .hljs-ln-numbers {
+  width: 2.8em;
+  padding-right: 0.8em;
+  color: var(--deck-code-gutter);
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.reveal .hljs-ln-code {
+  padding-left: 0.9em;
+}
+
+.reveal .hljs-ln tr.highlight-line td {
+  background: var(--deck-code-line);
+}
+
+.reveal .hljs-ln tr.highlight-line .hljs-ln-code {
+  box-shadow: inset 3px 0 0 var(--deck-code-line-accent);
+}
+
+.reveal .hljs-sorry {
+  color: #ff8c82;
+  font-weight: 700;
 }
 
 .section-slide {
@@ -99,6 +166,18 @@ body {
   margin-bottom: 0.25rem;
 }
 
+.opening-slide > h1 {
+  max-width: 10em;
+}
+
+.opening-slide > .lead {
+  max-width: 19em;
+}
+
+.opening-slide > ol {
+  max-width: 18em;
+}
+
 .lead,
 .subtitle {
   color: var(--deck-muted);
@@ -106,6 +185,15 @@ body {
 
 .lead {
   max-width: 18em;
+}
+
+.subtitle {
+  max-width: 24em;
+}
+
+.reveal .slides section:not(.section-slide) > .subtitle {
+  max-width: 22em;
+  font-size: 0.92em;
 }
 
 .reveal .progress {

@@ -1,4 +1,4 @@
-<!-- .slide: class="r-vstack items-start justify-center" -->
+<!-- .slide: class="r-vstack items-start justify-center opening-slide" -->
 
 <img src="assets/logo/lean_logo.svg" alt="Lean logo" class="lean-logo">
 
