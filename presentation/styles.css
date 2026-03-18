@@ -9,7 +9,7 @@
   --deck-muted: #5d6670;
   --deck-soft: #f7f8fa;
   --deck-copy-width: 29em;
-  --deck-code-width: 30em;
+  --deck-code-width: 31em;
   --deck-code-border: #c9d1da;
   --deck-code-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
   --deck-code-gutter: #656e77;
@@ -25,6 +25,11 @@ body {
 .reveal .slides section.content-slide,
 .reveal .slides section.opening-slide {
   text-align: left;
+}
+
+.reveal .slides > section:not(.stack),
+.reveal .slides > section.stack > section {
+  height: 100%;
 }
 
 .reveal p,
@@ -68,7 +73,7 @@ body {
   width: min(100%, var(--deck-code-width));
   margin: 0.4em 0;
   box-shadow: none;
-  font-size: 0.58em;
+  font-size: 0.61em;
   line-height: 1.4;
 }
 
@@ -118,16 +123,26 @@ body {
 
 .opening-flow,
 .section-flow {
-  min-height: 100%;
+  height: 100%;
+  row-gap: 0.45em;
+}
+
+.reveal .opening-flow > *,
+.reveal .section-flow > * {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .section-flow > p,
-.section-flow > :is(ul, ol),
-.opening-flow > ol,
-.opening-flow > .lead {
+.section-flow > :is(ul, ol) {
   max-width: 18em;
   margin-left: auto;
   margin-right: auto;
+}
+
+.opening-flow > ol,
+.opening-flow > .lead {
+  max-width: 18em;
 }
 
 .section-flow > :is(ul, ol) {
@@ -137,7 +152,6 @@ body {
 .lean-logo {
   width: 84px;
   height: auto;
-  margin-bottom: 0.25rem;
 }
 
 .opening-flow > h1 {
@@ -166,7 +180,7 @@ body {
   }
 
   .reveal pre {
-    font-size: 0.46em;
+    font-size: 0.48em;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-all;

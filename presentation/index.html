@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
     <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css">
     <link rel="stylesheet" href="vendor/highlightjs/stackoverflow-light.min.css">
-    <link rel="stylesheet" href="styles.css?v=20260318">
+    <link rel="stylesheet" href="styles.css?v=20260318-centerfix">
   </head>
   <body>
     <div class="reveal">
@@ -30,9 +30,9 @@
   <p class="lead">Programs, value-indexed types, and proofs in one typed language.</p>
 
   <ol>
-    <li class="fragment fade-up">Functional core.</li>
-    <li class="fragment fade-up">Dependent types.</li>
-    <li class="fragment fade-up">Proof terms.</li>
+    <li>Functional core.</li>
+    <li>Dependent types.</li>
+    <li>Proof terms.</li>
   </ol>
 </div>
 
@@ -264,7 +264,8 @@ Element types are preserved. Length is not.
 ## Value-dependent return types
 
 ```language-lean
-(b : Bool) → if b then Nat else String
+(b : Bool) →
+  if b then Nat else String
 ```
 
 - Return type depends on `b`.
@@ -277,7 +278,8 @@ Element types are preserved. Length is not.
 ## Pattern matching refines types
 
 ```language-lean []
-def natOrStringThree (b : Bool) : if b then Nat else String :=
+def natOrStringThree (b : Bool) :
+    if b then Nat else String :=
   match b with
   | true => (3 : Nat)
   | false => "three"

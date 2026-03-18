@@ -8,9 +8,9 @@
   <p class="lead">Programs, value-indexed types, and proofs in one typed language.</p>
 
   <ol>
-    <li class="fragment fade-up">Functional core.</li>
-    <li class="fragment fade-up">Dependent types.</li>
-    <li class="fragment fade-up">Proof terms.</li>
+    <li>Functional core.</li>
+    <li>Dependent types.</li>
+    <li>Proof terms.</li>
   </ol>
 </div>
 

@@ -26,7 +26,8 @@ Element types are preserved. Length is not.
 ## Value-dependent return types
 
 ```language-lean
-(b : Bool) → if b then Nat else String
+(b : Bool) →
+  if b then Nat else String
 ```
 
 - Return type depends on `b`.
@@ -37,7 +38,8 @@ Element types are preserved. Length is not.
 ## Pattern matching refines types
 
 ```language-lean []
-def natOrStringThree (b : Bool) : if b then Nat else String :=
+def natOrStringThree (b : Bool) :
+    if b then Nat else String :=
   match b with
   | true => (3 : Nat)
   | false => "three"
