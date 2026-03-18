@@ -1,0 +1,6 @@
+[submodule "fp-lean"]
+	path = fp-lean
+	url = https://github.com/leanprover/fp-lean.git
+[submodule "theorem_proving_in_lean4"]
+	path = theorem_proving_in_lean4
+	url = https://github.com/leanprover/theorem_proving_in_lean4
