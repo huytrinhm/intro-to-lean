@@ -9,7 +9,7 @@
   --deck-muted: #5d6670;
   --deck-soft: #f7f8fa;
   --deck-copy-width: 29em;
-  --deck-code-width: 31em;
+  --deck-code-width: 32em;
   --deck-code-border: #c9d1da;
   --deck-code-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
   --deck-code-gutter: #656e77;
@@ -73,7 +73,7 @@ body {
   width: min(100%, var(--deck-code-width));
   margin: 0.4em 0;
   box-shadow: none;
-  font-size: 0.61em;
+  font-size: 0.66em;
   line-height: 1.4;
 }
 
@@ -180,7 +180,7 @@ body {
   }
 
   .reveal pre {
-    font-size: 0.48em;
+    font-size: 0.52em;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-all;

@@ -72,7 +72,8 @@ theorem keepFirst (p q : Prop) (hp : p) (hq : q) : p := hp
 ## Composed proof term
 
 ```language-lean
-theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
+theorem and_commutative
+    (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
   And.intro (And.right hpq) (And.left hpq)
 ```
 
@@ -85,7 +86,8 @@ theorem and_commutative (p q : Prop) (hpq : p ∧ q) : q ∧ p :=
 ## Tactic script
 
 ```language-lean []
-theorem and_commutative_tactic (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
+theorem and_commutative_tactic
+    (p q : Prop) (hpq : p ∧ q) : q ∧ p := by
   apply And.intro
   exact And.right hpq
   exact And.left hpq
