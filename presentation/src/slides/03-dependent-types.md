@@ -14,6 +14,7 @@ List α → List β → List (α × β)
 ```
 
 Element types are preserved. Length is not.
+
 <!-- .element: class="subtitle" -->
 
 - Ignore extra data?
@@ -77,18 +78,20 @@ inductive Vect (α : Type) : Nat → Type where
 ```language-lean []
 inductive Vect (α : Type) : Nat → Type where
   | nil : Vect α 0
-  | cons : α → {n : Nat} → Vect α n → Vect α (n + 1)
+  | cons (head : α) {n : Nat} (tail : Vect α n) : Vect α (n + 1)
 ```
 
 - `cons` maps length `n` to `n + 1`.
 - The constructor enforces that change.
+- `{n : Nat}` means Lean will infer `n` from context (other parameters).
 
 --
 
 ## `Vect.zip` rules out mismatch
 
 ```language-lean []
-def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
+def Vect.zip (fst : Vect α n) (snd : Vect β n) : Vect (α × β) n :=
+  match fst, snd with
   | Vect.nil, Vect.nil => Vect.nil
   | Vect.cons x xs, Vect.cons y ys =>
       Vect.cons (x, y) (Vect.zip xs ys)
@@ -107,4 +110,5 @@ def Vect.zip : Vect α n → Vect β n → Vect (α × β) n
 - **Dependent function**: `(b : Bool) → if b then Nat else String`
 
 Types can track values and invariants.
+
 <!-- .element: class="subtitle" -->

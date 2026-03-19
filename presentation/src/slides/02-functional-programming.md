@@ -36,7 +36,8 @@ def hello : String := "Hello"
 
 - `def` binds a name.
 - `:=` gives its value.
-- The type annotation is explicit.
+- The type annotation can be implicit/omitted.
+- Lean offer Hindley-Milner type inference.
 
 --
 
@@ -48,6 +49,7 @@ def add1 (n : Nat) : Nat := n + 1
 
 - `(n : Nat)` declares the parameter type.
 - `: Nat` declares the return type.
+- Type annotation can be omitted.
 
 --
 
@@ -58,7 +60,7 @@ def addTwo (n : Nat) (k : Nat) : Nat := n + k
 ```
 
 - Each parameter has a type.
-- The return type stays explicit.
+- Prefer to be explicit about type.
 
 --
 
@@ -97,6 +99,8 @@ inductive Nat where
   | succ (n : Nat) : Nat
 ```
 
+- Beside constant, constructor can also be unintepreted function.
+- `succ n` just store `n`, it does compute anything.
 - `Nat` is built from `zero` and `succ`.
 - Programs over `Nat` follow those constructors.
 
@@ -131,4 +135,5 @@ List String
 ```
 
 Next: types indexed by values.
+
 <!-- .element: class="subtitle" -->
